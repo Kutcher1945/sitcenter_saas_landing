@@ -1,0 +1,131 @@
+"use client";
+import ArrowRight from "@/assets/arrow-right.svg";
+import starImage from "@/assets/star.png";
+import springImage from "@/assets/spring.png";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
+export const CallToAction = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+
+  const handleEmailRedirect = () => {
+    window.location.href = "mailto:example@example.com"; // Replace with your email address
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Your message has been sent!"); // Replace with your form handling logic
+  };
+
+  return (
+    <section
+      id="contacts"
+      ref={sectionRef}
+      className="bg-gradient-to-b from-[#D2DCFF] to-[#1D1D2F] py-24 overflow-x-clip relative"
+    >
+      <div className="container mx-auto px-6">
+        {/* Section Heading */}
+        <div className="section-heading relative text-center mb-10">
+          <h2 className="section-title text-3xl font-bold">Свяжитесь с нами</h2>
+          <p className="section-des mt-5 text-lg">
+            Мы готовы ответить на ваши вопросы и предоставить дополнительную
+            информацию.
+          </p>
+
+          {/* Decorative Images */}
+          <motion.img
+            src={starImage.src}
+            alt="звезда"
+            width={360}
+            className="absolute -left-[350px] -top-[137px]"
+            style={{
+              translateY,
+            }}
+          />
+          <motion.img
+            src={springImage.src}
+            alt="весна"
+            width={360}
+            className="absolute -right-[331px] -top-[19px]"
+            style={{
+              translateY,
+            }}
+          />
+        </div>
+
+        {/* Contact Form */}
+        <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto relative z-10">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Имя
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Сообщение
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                required
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              ></textarea>
+            </div>
+            <div className="flex justify-between items-center gap-4">
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all"
+              >
+                Отправить сообщение
+              </button>
+              <button
+                type="button"
+                className="w-full bg-gray-100 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
+                onClick={handleEmailRedirect}
+              >
+                <span>Написать нам</span>
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
