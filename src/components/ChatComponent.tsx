@@ -103,7 +103,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
       style={{ maxHeight: "80vh", padding: "10px" }}
     >
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
-        <h2 className="text-lg font-semibold">Chat with Assistant</h2>
+        <h2 className="text-lg font-semibold">Общайтесь с Сити-Ботом</h2>
         <button className="text-white hover:text-gray-300" onClick={onClose}>
           ✕
         </button>
@@ -142,7 +142,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
                 background: "linear-gradient(to right, #001E80, #3A50FF)",
               }}
             >
-              <span>Typing</span>
+              <span>Печатает</span>
               <span className="ml-2 flex space-x-1">
                 <span className="animate-bounce delay-75 w-1.5 h-1.5 bg-white rounded-full"></span>
                 <span className="animate-bounce delay-150 w-1.5 h-1.5 bg-white rounded-full"></span>
