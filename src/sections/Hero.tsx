@@ -213,20 +213,20 @@ export const Hero = () => {
           viewport={{ once: true }}
         >
           <motion.div variants={statsAnimation}>
-            <p className="text-4xl font-bold">70+</p>
-            <p className="text-lg text-gray-200">ГИС-слоев данных</p>
+            <p className="text-4xl font-bold">70</p>
+            <p className="text-lg text-gray-200">ГИС-слоев данных городских объектов</p>
           </motion.div>
           <motion.div variants={statsAnimation}>
             <p className="text-4xl font-bold">50+</p>
-            <p className="text-lg text-gray-200">информационных модулей</p>
+            <p className="text-lg text-gray-200">информационных модулей и дата-аналитических модулей</p>
+          </motion.div>
+          <motion.div variants={statsAnimation}>
+            <p className="text-4xl font-bold">50</p>
+            <p className="text-lg text-gray-200">интеграции и сбор данных</p>
           </motion.div>
           <motion.div variants={statsAnimation}>
             <p className="text-4xl font-bold">100</p>
             <p className="text-lg text-gray-200">индикаторов города</p>
-          </motion.div>
-          <motion.div variants={statsAnimation}>
-            <p className="text-4xl font-bold">500+</p>
-            <p className="text-lg text-gray-200">источников данных</p>
           </motion.div>
         </motion.div>
       </div>

@@ -69,8 +69,8 @@ export const ProductShowcase = () => {
     >
       {/* Motion Images */}
       <motion.img
-        src={leftHandImage.src}
-        alt="Left Hand"
+        // src={leftHandImage.src}
+        // alt="Left Hand"
         className="absolute -left-30 bottom-0 z-0 hidden lg:block object-contain"
         style={{
           height: "400px", // Adjust size for hands
@@ -79,8 +79,8 @@ export const ProductShowcase = () => {
         }}
       />
       <motion.img
-        src={rightHandImage.src}
-        alt="Right Hand"
+        // src={rightHandImage.src}
+        // alt="Right Hand"
         className="absolute -right-10 top-0 z-0 hidden lg:block object-contain"
         style={{
           height: "400px", // Adjust size for hands

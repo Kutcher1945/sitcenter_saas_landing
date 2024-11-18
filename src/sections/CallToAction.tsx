@@ -51,8 +51,8 @@ export const CallToAction = () => {
             }}
           />
           <motion.img
-            src={springImage.src}
-            alt="весна"
+            // src={springImage.src}
+            // alt="весна"
             width={260}
             className="absolute -right-[200px] -top-[50px] hidden sm:block"
             style={{
