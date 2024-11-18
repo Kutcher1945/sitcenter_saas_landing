@@ -18,10 +18,10 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
 
     try {
       console.log("Sending message to the API...");
-      console.log("API Endpoint: /api/mistral");
+      console.log("API Endpoint: /api.mistral.ai/v1/chat/completions");
 
       // Make the request to your server API
-      const res = await fetch("/api/mistral", {
+      const res = await fetch("/api.mistral.ai/v1/chat/completions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_text: userInput, language: "ru" }),
