@@ -1,10 +1,27 @@
 import { NextResponse } from "next/server";
 
-const API_KEY = process.env.MISTRAL_API_KEY; // Access from environment
-const ENDPOINT = "https://api.mistral.ai/v1/chat/completions";
+const API_KEY = process.env.MISTRAL_API_KEY; // Access API Key from environment
+const ENDPOINT = process.env.MISTRAL_API_ENDPOINT; // Access Endpoint from environment
 
 export async function POST(req: Request) {
   console.log("POST request received");
+
+  // Validate the endpoint and API key
+  if (!ENDPOINT) {
+    console.error("MISTRAL_API_ENDPOINT is not defined.");
+    return NextResponse.json(
+      { error: "Internal server error: API endpoint is not configured." },
+      { status: 500 }
+    );
+  }
+
+  if (!API_KEY) {
+    console.error("MISTRAL_API_KEY is not defined.");
+    return NextResponse.json(
+      { error: "Internal server error: API key is not configured." },
+      { status: 500 }
+    );
+  }
 
   let body;
   try {
@@ -32,6 +49,7 @@ export async function POST(req: Request) {
   console.log("Language:", language);
 
   console.log("Using API Key:", API_KEY); // Log the API key (REMOVE IN PRODUCTION)
+  console.log("Using API Endpoint:", ENDPOINT); // Log the endpoint (REMOVE IN PRODUCTION)
 
   const assistant_instruction =
     language === "ru"
