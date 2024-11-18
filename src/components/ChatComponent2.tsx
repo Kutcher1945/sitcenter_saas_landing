@@ -8,13 +8,9 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
   const messageContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // API Key and Endpoint (Hardcoded here for testing purposes)
-  const API_KEY = "QqkMxELY0YVGkCx17Vya04Sq9nGvCahu"; // Replace with your Mistral API key
-  const ENDPOINT = "https://api.mistral.ai/v1/chat/completions";
-
   const sendMessage = async () => {
     if (!userInput.trim()) return;
-    
+
     const newMessage = { user: userInput, response: "" };
     setMessages((prev) => [...prev, newMessage]);
     setLoading(true);
@@ -22,36 +18,11 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
 
     try {
       console.log("Sending message to the API...");
-      console.log("Using API Key:", API_KEY);
-      console.log("Using Endpoint:", ENDPOINT);
-        
-      const language = "ru"; // Set the language dynamically as needed
-      const assistant_instruction =
-            language === "ru"
-            ? "Вы — виртуальный помощник, ты работаешь в Ситуационном Центре города Алматы. Ваша задача — предоставлять оперативную и полезную информацию пользователям, помогать с вопросами, касающимися городской инфраструктуры, транспорта, экологии и других сфер. Используйте дружелюбный тон, добавляйте смайлики и эмоции для создания комфортной атмосферы общения. Отвечайте четко, кратко и по делу, оставайтесь вежливыми и внимательными к запросам."
-            : "You are a virtual assistant, you are working in the Situation Center of Almaty city. Your task is to provide timely and helpful information to users, assisting with inquiries related to urban infrastructure, transportation, ecology, and other areas. Use a friendly tone, include emojis and emotions to create a comfortable conversational atmosphere. Respond clearly, concisely, and to the point while remaining polite and attentive to user requests.";
-
-      const payload = {
-        model: "open-mistral-nemo",
-        temperature: 0.3,
-        top_p: 1,
-        max_tokens: 500,
-        messages: [
-          { role: "system", content: assistant_instruction },
-          { role: "user", content: userInput },
-        ],
-      };
-
-      console.log("Payload data:", payload);
-
-      // Make the request directly to Mistral API
-      const res = await fetch(ENDPOINT, {
+      // Make the request to your server API
+      const res = await fetch("/api/mistral", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_text: userInput, language: "ru" }),
       });
 
       console.log("Response status:", res.status);
@@ -59,7 +30,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
       if (!res.ok) {
         const errorDetails = await res.json();
         console.error("Error details from the server:", errorDetails);
-        throw new Error("Failed to fetch response from the API.");
+        throw new Error("Не удалось получить ответ от сервера.");
       }
 
       const data = await res.json();
@@ -67,10 +38,10 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
 
       setMessages((prev) => {
         const lastMessage = prev[prev.length - 1];
-        return [...prev.slice(0, -1), { ...lastMessage, response: data.choices[0].message.content }];
+        return [...prev.slice(0, -1), { ...lastMessage, response: data.content }];
       });
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError("Произошла ошибка. Попробуйте еще раз.");
       console.error("Error while sending message:", err);
     } finally {
       setUserInput("");
@@ -103,7 +74,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
       style={{ maxHeight: "80vh", padding: "10px" }}
     >
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
-        <h2 className="text-lg font-semibold">Chat with Assistant</h2>
+        <h2 className="text-lg font-semibold">Общайтесь с Сити-Ботом</h2>
         <button className="text-white hover:text-gray-300" onClick={onClose}>
           ✕
         </button>
@@ -142,7 +113,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
                 background: "linear-gradient(to right, #001E80, #3A50FF)",
               }}
             >
-              <span>Typing</span>
+              <span>Печатает</span>
               <span className="ml-2 flex space-x-1">
                 <span className="animate-bounce delay-75 w-1.5 h-1.5 bg-white rounded-full"></span>
                 <span className="animate-bounce delay-150 w-1.5 h-1.5 bg-white rounded-full"></span>
@@ -162,7 +133,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={handleKeyDown}
             ref={inputRef}
-            placeholder="Type your message..."
+            placeholder="Напишите сообщение..."
             className="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 text-sm"
             disabled={loading}
           />
@@ -175,7 +146,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
             onClick={sendMessage}
             disabled={loading}
           >
-            {loading ? "Sending..." : "Send"}
+            {loading ? "Отправка..." : "Отправить"}
           </button>
         </div>
       </div>
