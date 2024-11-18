@@ -141,7 +141,7 @@ export const Hero = () => {
             </button>
             <button
               className="text-xl font-semibold hover:text-gray-300"
-              onClick={() => handleScrollToSection("about")}
+              onClick={() => handleScrollToSection("features")}
             >
               О проекте
             </button>
