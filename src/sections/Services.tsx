@@ -138,7 +138,7 @@ export const Services = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          filter: "blur(3px)", // Add blur effect
+          filter: "blur(1.5px)", // Add blur effect
           zIndex: 1,
         }}
       ></div>
