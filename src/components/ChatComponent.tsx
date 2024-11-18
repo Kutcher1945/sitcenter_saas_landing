@@ -18,7 +18,8 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
 
     try {
       console.log("Sending message to the API...");
-
+      console.log("API Key:", process.env.MISTRAL_API_KEY);
+      console.log("Endpoint:", process.env.MISTRAL_API_ENDPOINT);
       // Make the request to your server API
       const res = await fetch("/api/mistral", {
         method: "POST",
