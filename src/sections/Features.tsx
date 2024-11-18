@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import robotImage from "@/assets/robosit.png";
 
 const Features = () => {
@@ -150,7 +151,7 @@ const Features = () => {
             alignItems: "center",
           }}
         >
-          <img
+          <Image
             src={robotImage.src}
             alt="Robot"
             style={{

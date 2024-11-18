@@ -93,7 +93,7 @@ export const Hero = () => {
               </button>
               <button
                 className="hover:text-gray-300 transition"
-                onClick={() => handleScrollToSection("about")}
+                onClick={() => handleScrollToSection("features")}
               >
                 О проекте
               </button>
