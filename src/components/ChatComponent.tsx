@@ -8,28 +8,23 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
   const messageContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // API Key and Endpoint (Hardcoded here for testing purposes)
-  const API_KEY = "QqkMxELY0YVGkCx17Vya04Sq9nGvCahu"; // Replace with your Mistral API key
+  const API_KEY = "QqkMxELY0YVGkCx17Vya04Sq9nGvCahu";
   const ENDPOINT = "https://api.mistral.ai/v1/chat/completions";
 
   const sendMessage = async () => {
     if (!userInput.trim()) return;
-    
+
     const newMessage = { user: userInput, response: "" };
     setMessages((prev) => [...prev, newMessage]);
     setLoading(true);
     setError("");
 
     try {
-      console.log("Sending message to the API...");
-      console.log("Using API Key:", API_KEY);
-      console.log("Using Endpoint:", ENDPOINT);
-        
-      const language = "ru"; // Set the language dynamically as needed
+      const language = "ru";
       const assistant_instruction =
-            language === "ru"
-            ? "Вы — виртуальный помощник, ты работаешь в Ситуационном Центре города Алматы. Ваша задача — предоставлять оперативную и полезную информацию пользователям, помогать с вопросами, касающимися городской инфраструктуры, транспорта, экологии и других сфер. Используйте дружелюбный тон, добавляйте смайлики и эмоции для создания комфортной атмосферы общения. Отвечайте четко, кратко и по делу, оставайтесь вежливыми и внимательными к запросам."
-            : "You are a virtual assistant, you are working in the Situation Center of Almaty city. Your task is to provide timely and helpful information to users, assisting with inquiries related to urban infrastructure, transportation, ecology, and other areas. Use a friendly tone, include emojis and emotions to create a comfortable conversational atmosphere. Respond clearly, concisely, and to the point while remaining polite and attentive to user requests.";
+        language === "ru"
+          ? "Вы — виртуальный помощник..."
+          : "You are a virtual assistant...";
 
       const payload = {
         model: "open-mistral-nemo",
@@ -42,9 +37,6 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
         ],
       };
 
-      console.log("Payload data:", payload);
-
-      // Make the request directly to Mistral API
       const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: {
@@ -54,16 +46,12 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
         body: JSON.stringify(payload),
       });
 
-      console.log("Response status:", res.status);
-
       if (!res.ok) {
         const errorDetails = await res.json();
-        console.error("Error details from the server:", errorDetails);
         throw new Error("Failed to fetch response from the API.");
       }
 
       const data = await res.json();
-      console.log("Response from API:", data);
 
       setMessages((prev) => {
         const lastMessage = prev[prev.length - 1];
@@ -71,7 +59,6 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
       });
     } catch (err) {
       setError("An error occurred. Please try again.");
-      console.error("Error while sending message:", err);
     } finally {
       setUserInput("");
       setLoading(false);
@@ -99,31 +86,31 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <div
-      className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 w-full max-w-lg bg-white shadow-lg rounded-lg overflow-hidden z-50"
-      style={{ maxHeight: "80vh", padding: "10px" }}
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-[90%] max-w-xs sm:max-w-lg bg-white shadow-lg rounded-lg overflow-hidden z-50"
+      style={{ maxHeight: "60vh" }}
     >
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
-        <h2 className="text-lg font-semibold">Общайтесь с Сити-Ботом</h2>
-        <button className="text-white hover:text-gray-300" onClick={onClose}>
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-2 sm:p-3 flex justify-between items-center rounded-t-lg">
+        <h2 className="text-xs sm:text-lg font-semibold">Общайтесь с Сити-Ботом</h2>
+        <button className="text-white hover:text-gray-300 text-sm sm:text-lg" onClick={onClose}>
           ✕
         </button>
       </div>
 
       <div
         ref={messageContainerRef}
-        className="h-[60vh] sm:h-[500px] overflow-y-auto p-4 bg-gray-50"
+        className="h-[40vh] overflow-y-auto p-2 sm:p-4 bg-gray-50"
       >
         {messages.map((msg, index) => (
-          <div key={index} className="mb-4">
+          <div key={index} className="mb-2">
             <div className="flex justify-end">
-              <div className="bg-blue-500 text-white p-3 rounded-lg max-w-xs shadow-md text-sm">
+              <div className="bg-blue-500 text-white p-2 sm:p-3 rounded-lg max-w-[70%] text-xs sm:text-sm">
                 {msg.user}
               </div>
             </div>
             {msg.response && (
               <div className="flex justify-start mt-2">
                 <div
-                  className="text-white p-3 rounded-lg max-w-xs shadow-md text-sm"
+                  className="text-white p-2 sm:p-3 rounded-lg max-w-[70%] text-xs sm:text-sm"
                   style={{
                     background: "linear-gradient(to right, #001E80, #3A50FF)",
                   }}
@@ -137,24 +124,24 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
         {loading && (
           <div className="flex justify-start mt-2">
             <div
-              className="text-white p-3 rounded-lg max-w-xs shadow-md flex items-center"
+              className="text-white p-2 sm:p-3 rounded-lg max-w-[70%] flex items-center"
               style={{
                 background: "linear-gradient(to right, #001E80, #3A50FF)",
               }}
             >
-              <span>Печатает</span>
+              <span>Typing</span>
               <span className="ml-2 flex space-x-1">
-                <span className="animate-bounce delay-75 w-1.5 h-1.5 bg-white rounded-full"></span>
+                <span className="animate-bounce w-1.5 h-1.5 bg-white rounded-full"></span>
                 <span className="animate-bounce delay-150 w-1.5 h-1.5 bg-white rounded-full"></span>
                 <span className="animate-bounce delay-300 w-1.5 h-1.5 bg-white rounded-full"></span>
               </span>
             </div>
           </div>
         )}
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p className="text-red-500 text-xs">{error}</p>}
       </div>
 
-      <div className="border-t p-4 bg-white">
+      <div className="border-t p-2 sm:p-4 bg-white">
         <div className="flex items-center space-x-2">
           <input
             type="text"
@@ -163,11 +150,11 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
             onKeyDown={handleKeyDown}
             ref={inputRef}
             placeholder="Задайте мне вопрос..."
-            className="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 text-sm"
+            className="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 text-xs sm:text-sm"
             disabled={loading}
           />
           <button
-            className={`px-4 py-2 rounded-lg text-white font-semibold ${
+            className={`px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white font-semibold ${
               loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700"
@@ -175,7 +162,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
             onClick={sendMessage}
             disabled={loading}
           >
-            {loading ? "Sending..." : "Send"}
+            {loading ? "..." : "Send"}
           </button>
         </div>
       </div>
