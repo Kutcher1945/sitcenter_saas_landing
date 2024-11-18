@@ -58,7 +58,7 @@ export default function RootLayout({
           </div>
         </header> */}
         <main>{children}</main>
-        <footer className="bg-[#1E34A0] text-white py-6">
+        {/* <footer className="bg-[#1E34A0] text-white py-6">
           <div className="container mx-auto px-6 text-center">
             <p className="text-sm">
               © 2024 Ситуационный Центр Алматы. Все права защищены.
@@ -67,7 +67,7 @@ export default function RootLayout({
               Свяжитесь с нами: <a href="mailto:contact@smartalmaty.kz" className="text-blue-300">contact@smartalmaty.kz</a>
             </p>
           </div>
-        </footer>
+        </footer> */}
       </body>
     </html>
   );
