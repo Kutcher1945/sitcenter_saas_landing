@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 
 export const LogoTicker = () => {
   const logos = [
-    <AcmeLogo key="acme" className="h-12 md:h-16 w-auto" />,
-    <QuantamLogo key="quantam" className="h-12 md:h-16 w-19" />,
-    <EchoLogo key="echo" className="h-12 md:h-16 w-19" />,
-    <CelestialLogo key="celestial" className="h-12 md:h-16 w-19" />,
+    <AcmeLogo key="acme" className="h-8 md:h-12 lg:h-16 w-auto" />,
+    <QuantamLogo key="quantam" className="h-8 md:h-12 lg:h-16 w-auto" />,
+    <EchoLogo key="echo" className="h-8 md:h-12 lg:h-16 w-auto" />,
+    <CelestialLogo key="celestial" className="h-8 md:h-12 lg:h-16 w-auto" />,
   ];
 
   return (
-    <div className="py-8 md:py-12 bg-[#1D1D2F]"> {/* Updated background color */}
+    <div className="py-6 md:py-8 lg:py-12 bg-[#1D1D2F]">
       <div className="container mx-auto relative">
         {/* Masked scrolling effect */}
         <div
@@ -25,7 +25,7 @@ export const LogoTicker = () => {
           }}
         >
           <motion.div
-            className="flex gap-16"
+            className="flex gap-8 md:gap-16"
             animate={{
               x: ["0%", "-100%"],
             }}
@@ -39,7 +39,7 @@ export const LogoTicker = () => {
             {logos.concat(logos).map((logo, index) => (
               <div
                 key={`logo_${index}`}
-                className="flex items-center justify-center transform hover:scale-110 transition-transform duration-300"
+                className="flex items-center justify-center transform hover:scale-105 transition-transform duration-300"
               >
                 {logo}
               </div>

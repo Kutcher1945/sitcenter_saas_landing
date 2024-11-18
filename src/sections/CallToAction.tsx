@@ -44,7 +44,7 @@ export const CallToAction = () => {
           <motion.img
             src={starImage.src}
             alt="звезда"
-            width={300}
+            width={260}
             className="absolute -left-[200px] -top-[100px] hidden sm:block"
             style={{
               translateY,
@@ -53,7 +53,7 @@ export const CallToAction = () => {
           <motion.img
             src={springImage.src}
             alt="весна"
-            width={280}
+            width={260}
             className="absolute -right-[200px] -top-[50px] hidden sm:block"
             style={{
               translateY,

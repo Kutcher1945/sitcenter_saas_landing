@@ -129,14 +129,23 @@ export const Services = () => {
     <section
       id="services"
       className="py-16 bg-white relative"
-      style={{
-        backgroundImage: `url(${backgroundImage.src})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      }}
     >
-      <div className="absolute inset-0 bg-white/90 -z-10"></div> {/* White overlay */}
+      {/* Blurred Background Image */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url(${backgroundImage.src})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          filter: "blur(3px)", // Add blur effect
+          zIndex: 1,
+        }}
+      ></div>
+
+      {/* White overlay */}
+      <div className="absolute inset-0 bg-white/90 -z-10"></div>
+
       <div className="container mx-auto px-6 relative z-10">
         {/* Text container styled like a card */}
         <div className="max-w-4xl mx-auto mb-10 bg-white p-8 rounded-lg shadow-lg">
@@ -186,4 +195,3 @@ export const Services = () => {
     </section>
   );
 };
-    
