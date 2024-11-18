@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const API_KEY = "QqkMxELY0YVGkCx17Vya04Sq9nGvCahu";
+const API_KEY = process.env.MISTRAL_API_KEY; // Access from environment
 const ENDPOINT = "https://api.mistral.ai/v1/chat/completions";
 
 export async function POST(req: Request) {
