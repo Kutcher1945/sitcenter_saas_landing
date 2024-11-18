@@ -197,7 +197,10 @@ export const Hero = () => {
               animate="visible"
               variants={textAnimation}
             >
-              <button className="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition">
+              <button
+                className="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition"
+                onClick={() => window.location.href = "https://opendata.smartalmaty.kz/"}
+              >
                 Перейти на OpenData
               </button>
             </motion.div>
