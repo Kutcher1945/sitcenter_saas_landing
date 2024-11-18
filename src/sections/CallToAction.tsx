@@ -20,20 +20,22 @@ export const CallToAction = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Your message has been sent!"); // Replace with your form handling logic
+    alert("Ваше сообщение отправлено!"); // Replace with your form handling logic
   };
 
   return (
     <section
       id="contacts"
       ref={sectionRef}
-      className="bg-gradient-to-b from-[#D2DCFF] to-[#1D1D2F] py-24 overflow-x-clip relative"
+      className="bg-gradient-to-b from-[#D2DCFF] to-[#1D1D2F] py-16 sm:py-24 overflow-x-clip relative"
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Heading */}
-        <div className="section-heading relative text-center mb-10">
-          <h2 className="section-title text-3xl font-bold">Свяжитесь с нами</h2>
-          <p className="section-des mt-5 text-lg">
+        <div className="section-heading relative text-center mb-8 sm:mb-10">
+          <h2 className="section-title text-2xl sm:text-3xl font-bold">
+            Свяжитесь с нами
+          </h2>
+          <p className="section-des mt-4 sm:mt-5 text-base sm:text-lg">
             Мы готовы ответить на ваши вопросы и предоставить дополнительную
             информацию.
           </p>
@@ -42,8 +44,8 @@ export const CallToAction = () => {
           <motion.img
             src={starImage.src}
             alt="звезда"
-            width={360}
-            className="absolute -left-[350px] -top-[137px]"
+            width={300}
+            className="absolute -left-[200px] -top-[100px] hidden sm:block"
             style={{
               translateY,
             }}
@@ -51,8 +53,8 @@ export const CallToAction = () => {
           <motion.img
             src={springImage.src}
             alt="весна"
-            width={360}
-            className="absolute -right-[331px] -top-[19px]"
+            width={280}
+            className="absolute -right-[200px] -top-[50px] hidden sm:block"
             style={{
               translateY,
             }}
@@ -60,8 +62,8 @@ export const CallToAction = () => {
         </div>
 
         {/* Contact Form */}
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto relative z-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 max-w-lg sm:max-w-2xl mx-auto relative z-10">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
               <label
                 htmlFor="name"
@@ -74,7 +76,7 @@ export const CallToAction = () => {
                 id="name"
                 name="name"
                 required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               />
             </div>
             <div>
@@ -89,7 +91,7 @@ export const CallToAction = () => {
                 id="email"
                 name="email"
                 required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               />
             </div>
             <div>
@@ -102,21 +104,21 @@ export const CallToAction = () => {
               <textarea
                 id="message"
                 name="message"
-                rows={4}
+                rows={3}
                 required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               ></textarea>
             </div>
-            <div className="flex justify-between items-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all"
+                className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-all text-sm sm:text-base"
               >
                 Отправить сообщение
               </button>
               <button
                 type="button"
-                className="w-full bg-gray-100 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto bg-gray-100 text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
                 onClick={handleEmailRedirect}
               >
                 <span>Написать нам</span>
