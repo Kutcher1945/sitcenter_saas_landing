@@ -62,7 +62,10 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
   }, [messages, loading]);
 
   return (
-    <div className="fixed bottom-6 right-6 w-full max-w-lg bg-white shadow-2xl rounded-lg overflow-hidden z-50">
+        <div
+      className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 w-full max-w-lg bg-white shadow-lg rounded-lg overflow-hidden z-50"
+      style={{ maxHeight: "80vh", padding: "10px" }} // Adds space from the browser edge
+    >
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center">
         <h2 className="text-lg font-semibold">Общайтесь с Сити-Ботом</h2>
@@ -74,21 +77,21 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
       {/* Messages */}
       <div
         ref={messageContainerRef}
-        className="h-[500px] overflow-y-auto p-4 bg-gray-50"
+        className="h-[60vh] sm:h-[500px] overflow-y-auto p-4 bg-gray-50"
       >
         {messages.map((msg, index) => (
           <div key={index} className="mb-4">
             {/* User Message */}
             <div className="flex justify-end">
-              <div className="bg-blue-500 text-white p-3 rounded-lg max-w-xs shadow-md">
+              <div className="bg-blue-500 text-white p-3 rounded-lg max-w-xs shadow-md text-sm">
                 {msg.user}
               </div>
             </div>
-            {/* Bot Response with Gradient Background */}
+            {/* Bot Response */}
             {msg.response && (
               <div className="flex justify-start mt-2">
                 <div
-                  className="text-white p-3 rounded-lg max-w-xs shadow-md"
+                  className="text-white p-3 rounded-lg max-w-xs shadow-md text-sm"
                   style={{
                     background: "linear-gradient(to right, #001E80, #3A50FF)",
                   }}
@@ -119,7 +122,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
         )}
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
-
+      
       {/* Input */}
       <div className="border-t p-4 bg-white">
         <div className="flex items-center space-x-2">
@@ -130,12 +133,14 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
             onKeyDown={handleKeyDown}
             ref={inputRef}
             placeholder="Напишите сообщение..."
-            className="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
+            className="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 text-sm"
             disabled={loading}
           />
           <button
             className={`px-4 py-2 rounded-lg text-white font-semibold ${
-              loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
             }`}
             onClick={sendMessage}
             disabled={loading}
