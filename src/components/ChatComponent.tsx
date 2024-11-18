@@ -162,7 +162,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={handleKeyDown}
             ref={inputRef}
-            placeholder="Type your message..."
+            placeholder="Задайте мне вопрос..."
             className="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 text-sm"
             disabled={loading}
           />
