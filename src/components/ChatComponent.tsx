@@ -169,3 +169,4 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
     </div>
   );
 };
+
