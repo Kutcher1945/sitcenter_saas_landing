@@ -129,7 +129,7 @@ export const ChatComponent = ({ onClose }: { onClose: () => void }) => {
                 background: "linear-gradient(to right, #001E80, #3A50FF)",
               }}
             >
-              <span>Typing</span>
+              <span>Печатает</span>
               <span className="ml-2 flex space-x-1">
                 <span className="animate-bounce w-1.5 h-1.5 bg-white rounded-full"></span>
                 <span className="animate-bounce delay-150 w-1.5 h-1.5 bg-white rounded-full"></span>
